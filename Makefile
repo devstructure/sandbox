@@ -94,7 +94,7 @@ deb:
 	m4 \
 		-D__VERSION__=$(VERSION) \
 		-D__DEB_BUILD_ARCH__=$(DEB_BUILD_ARCH) \
-		control-sandbox.m4 >control
+		control.m4 >control
 	debra create debian control
 	cp postinst debian/DEBIAN/
 	git archive --format=tar --prefix=debian/ HEAD | gzip >debian.tar.gz
