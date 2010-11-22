@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Usage: sandbox-upgrade [now]
+
+set -e
+
+[ "$1" = "now" ] || sleep $(($RANDOM % (60 * 57)))
+
+apt-get update
+apt-get install sandbox
+
+for S in $(ls /var/sandboxes 2>/dev/null)
+do
+	sandbox-use $S -c "sandbox-upgrade now"
+done

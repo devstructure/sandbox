@@ -1,0 +1,9 @@
+*.swp
+*.o
+*.html
+*.deb
+control
+bin/*
+!bin/sandbox
+!bin/sandbox-essential
+!bin/sandbox-upgrade
