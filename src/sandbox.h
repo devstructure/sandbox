@@ -10,7 +10,6 @@ char *sandbox_which();
 int sandbox_create(const char *name);
 int sandbox_clone(const char *srcname, const char *destname);
 int sandbox_use(const char *name, const char *command, const char *callback);
-int sandbox_mark(const char *name, const char *pathname);
 int sandbox_destroy(const char *name);
 
 #endif

@@ -17,7 +17,6 @@ PROGRAMSOURCES=\
 	src/bin/sandbox-create.c \
 	src/bin/sandbox-clone.c \
 	src/bin/sandbox-use.c \
-	src/bin/sandbox-mark.c \
 	src/bin/sandbox-destroy.c
 PROGRAMOBJECTS=$(PROGRAMSOURCES:.c=.o)
 PROGRAMS=\
@@ -26,7 +25,6 @@ PROGRAMS=\
 	sandbox-create \
 	sandbox-clone \
 	sandbox-use \
-	sandbox-mark \
 	sandbox-destroy
 LIBSOURCES=\
 	src/dir.c \
