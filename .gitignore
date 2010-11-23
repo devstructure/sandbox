@@ -1,5 +1,6 @@
 *.swp
 *.o
+*.[12345678]
 *.html
 *.deb
 control

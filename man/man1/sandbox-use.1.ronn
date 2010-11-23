@@ -1,0 +1,39 @@
+sandbox-use(1) -- run commands in a sandbox
+===========================================
+
+## SYNOPSIS
+
+`sandbox use` _sandbox_ [`-c` _command_] [`--callback=`_callback_] [`-q`] [`-h`]  
+
+## DESCRIPTION
+
+`sandbox-use` runs commands in a sandbox.  If no command is specified, your login shell is run and is given the `-i` and `-l` arguments.  The _command_ will be run as you.
+
+Regardless of what command is run, the _callback_ command, if given, will follow the termination of _command_.
+
+## OPTIONS
+
+* _sandbox_:
+  Name of a sandbox.
+* `-c` _command_, `--command=`_command_:
+  Command to run.  Defaults to your shell.
+* `--callback=`_callback_:
+  Command to run when _command_ exits.
+* `-q`, `--quiet`:
+  Operate quietly.
+* `-h`, `--help`:
+  Show a help message.
+
+## THEME SONG
+
+The Flaming Lips - "The W.A.N.D. (The Will Always Negates Defeat)"
+
+## AUTHOR
+
+Richard Crowley <richard@devstructure.com>
+
+## SEE ALSO
+
+Part of `sandbox`(1).
+
+`sandbox-list`(1), `sandbox-which`(1), `sandbox-create`(1), `sandbox-clone`(1), `sandbox-use`(1), and `sandbox-destroy`(1).

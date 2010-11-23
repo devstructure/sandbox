@@ -1,0 +1,37 @@
+sandbox-clone(1) -- clone an existing sandbox
+=============================================
+
+## SYNOPSIS
+
+`sandbox clone` [_sandbox-src_] _sandbox-dest_ [`-q`] [`-h`]  
+
+## DESCRIPTION
+
+`sandbox-clone` creates a new sandbox from an existing sandbox.  The new sandbox will contain a deep copy of your home directory and a shallow copy of the rest of the server's filesystem as they exist in the source sandbox.  As with `sandbox-create`(1), devices will be remounted using `mount`(8) and the new sandbox will be stored in /var/sandboxes/_sandbox-dest_.
+
+After cloning a sandbox, you'll probably want to run commands in it using `sandbox-use`(1).
+
+## OPTIONS
+
+* [_sandbox-src_]:
+  Name of an existing sandbox.  Defaults to the current sandbox.
+* _sandbox-dest_:
+  Name of a nonexistent sandbox.
+* `-q`, `--quiet`:
+  Operate quietly.
+* `-h`, `--help`:
+  Show a help message.
+
+## THEME SONG
+
+The Flaming Lips - "The W.A.N.D. (The Will Always Negates Defeat)"
+
+## AUTHOR
+
+Richard Crowley <richard@devstructure.com>
+
+## SEE ALSO
+
+Part of `sandbox`(1).
+
+`sandbox-list`(1), `sandbox-which`(1), `sandbox-create`(1), `sandbox-clone`(1), `sandbox-use`(1), and `sandbox-destroy`(1).

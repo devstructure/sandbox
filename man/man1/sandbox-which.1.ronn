@@ -1,0 +1,36 @@
+sandbox-which(1) -- print the name of the current sandbox
+=========================================================
+
+## SYNOPSIS
+
+`sandbox which` [`-q`] [`-h`]  
+
+## DESCRIPTION
+
+`sandbox-which` prints the name of the current sandbox.  When you are in the base sandbox, nothing is printed.  This is in contrast to the internal representation of sandboxes which labels the base sandbox "/".
+
+## OPTIONS
+
+* `-q`, `--quiet`:
+  Operate quietly.
+* `-h`, `--help`:
+  Show a help message.
+
+## FILES
+
+* /etc/profile.d/sandbox_prompt.sh:
+  Uses `sandbox-which` to put the name of the current sandbox in your prompt enclosed in brackets ("[" and "]").
+
+## THEME SONG
+
+The Flaming Lips - "The W.A.N.D. (The Will Always Negates Defeat)"
+
+## AUTHOR
+
+Richard Crowley <richard@devstructure.com>
+
+## SEE ALSO
+
+Part of `sandbox`(1).
+
+`sandbox-list`(1), `sandbox-which`(1), `sandbox-create`(1), `sandbox-clone`(1), `sandbox-use`(1), `sandbox-mark`(1), and `sandbox-destroy`(1).

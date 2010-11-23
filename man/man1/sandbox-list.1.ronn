@@ -1,0 +1,37 @@
+sandbox-list(1) -- list all sandboxes
+=====================================
+
+## SYNOPSIS
+
+`sandbox list` [`-n`] [`-q`] [`-h`]  
+
+## DESCRIPTION
+
+`sandbox-list` lists all sandboxes present on a server.  When the `-n` option is provided, it is functionally equivalent to the command
+
+	ls -1 /var/sandboxes/
+
+Without `-n`, the current sandbox is indicated by a `*`.
+
+## OPTIONS
+
+* `-n`, `--names`:
+  Show names only; do not indicate the current sandbox.
+* `-q`, `--quiet`:
+  Operate quietly.
+* `-h`, `--help`:
+  Show a help message.
+
+## THEME SONG
+
+The Flaming Lips - "The W.A.N.D. (The Will Always Negates Defeat)"
+
+## AUTHOR
+
+Richard Crowley <richard@devstructure.com>
+
+## SEE ALSO
+
+Part of `sandbox`(1).
+
+`sandbox-list`(1), `sandbox-which`(1), `sandbox-create`(1), `sandbox-clone`(1), `sandbox-use`(1), and `sandbox-destroy`(1).

@@ -1,0 +1,35 @@
+sandboxfs(1) -- copy-on-write filesystem
+========================================
+
+## SYNOPSIS
+
+`sandboxfs` `-oallow_other` [_mountpoint_] [`-f`]  
+
+## DESCRIPTION
+
+`sandboxfs` implements a copy-on-write filesystem designed to reduce users' need to use `blueprint-mark`(1).  Each sandbox has a "shadow" directory that contains the backing filesystem trees used by `sandboxfs`, located at /var/sandboxes/._sandbox_.
+
+By default, a `sandboxfs` will be mounted in each sandbox at /etc.
+
+## OPTIONS
+
+* `-oallow_other`:
+  Allow users other than the mounting user to access files on this device.  In general, the mounting user is root so this option must be supplied for normal users to go about their business.
+* _mountpoint_:
+  The directory to which the filesystem is attached.  Generally, this takes the form /var/sandboxes/_sandbox_/etc.
+* `-f`:
+  Do not retreat into the background.  This will produce copious output and is mainly available for debugging purposes.
+
+## THEME SONG
+
+The Flaming Lips - "The W.A.N.D. (The Will Always Negates Defeat)"
+
+## AUTHOR
+
+Richard Crowley <richard@devstructure.com>
+
+## SEE ALSO
+
+Part of `sandbox`(1).
+
+`sandbox-list`(1), `sandbox-which`(1), `sandbox-create`(1), `sandbox-clone`(1), `sandbox-use`(1), and `sandbox-destroy`(1).
