@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+[ "root" != "$USER" ] && exec sudo $0 "$@"
+
+COMMAND="$0-$1"
+[ -x "$COMMAND" ] && {
+	shift
+	exec "$COMMAND" "$@"
+}
+
+echo "Usage: $(basename $0) <command> [...]" >&2
+echo "Common commands: list, which, create, clone, use, unlock, blueprint, destroy" >&2
+echo "See all available commands by typing \"$(basename $0)-<TAB><TAB>\"" >&2
+exit 1
