@@ -389,9 +389,16 @@ int dir_shallowcopy_hardlink(
 	int result = -1;
 	char *pathname2 = 0;
 	pathname2 = file_join(dest, basename);
+
+	/* Deep copy files that are `setuid` and such. */
 	if (s->st_mode & (S_ISUID | S_ISGID | S_ISVTX) || !(s->st_mode & (
 		S_IFREG | S_IFLNK | S_IFDIR | S_IFIFO | S_IFSOCK | S_IFBLK | S_IFCHR
 	))) {
+		if (file_copy(pathname, pathname2)) { goto error; }
+	}
+
+	/* Deep copy the `dpkg`(1) lock file. */
+	else if (!strcmp("/var/lib/dpkg/lock", pathname)) {
 		if (file_copy(pathname, pathname2)) { goto error; }
 	}
 
