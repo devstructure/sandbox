@@ -1,0 +1,41 @@
+.\" generated with Ronn/v0.7.3
+.\" http://github.com/rtomayko/ronn/tree/0.7.3
+.
+.TH "SANDBOX\-WHICH" "1" "November 2010" "DevStructure" "Sandbox"
+.
+.SH "NAME"
+\fBsandbox\-which\fR \- print the name of the current sandbox
+.
+.SH "SYNOPSIS"
+\fBsandbox which\fR [\fB\-q\fR] [\fB\-h\fR]
+.
+.SH "DESCRIPTION"
+\fBsandbox\-which\fR prints the name of the current sandbox\. When you are in the base sandbox, nothing is printed\. This is in contrast to the internal representation of sandboxes which labels the base sandbox "/"\.
+.
+.SH "OPTIONS"
+.
+.TP
+\fB\-q\fR, \fB\-\-quiet\fR
+Operate quietly\.
+.
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+Show a help message\.
+.
+.SH "FILES"
+.
+.TP
+/etc/profile\.d/sandbox_prompt\.sh
+Uses \fBsandbox\-which\fR to put the name of the current sandbox in your prompt enclosed in brackets ("[" and "]")\.
+.
+.SH "THEME SONG"
+The Flaming Lips \- "The W\.A\.N\.D\. (The Will Always Negates Defeat)"
+.
+.SH "AUTHOR"
+Richard Crowley \fIrichard@devstructure\.com\fR
+.
+.SH "SEE ALSO"
+Part of \fBsandbox\fR(1)\.
+.
+.P
+\fBsandbox\-list\fR(1), \fBsandbox\-which\fR(1), \fBsandbox\-create\fR(1), \fBsandbox\-clone\fR(1), \fBsandbox\-use\fR(1), \fBsandbox\-mark\fR(1), and \fBsandbox\-destroy\fR(1)\.
