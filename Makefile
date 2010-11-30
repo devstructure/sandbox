@@ -107,7 +107,7 @@ deploy:
 	ssh -i ~/production.pem -t ubuntu@packages.devstructure.com "sudo freight add sandbox_$(VERSION)_$(DEB_BUILD_ARCH).deb apt/$(LSB_RELEASE_CODENAME) && rm sandbox_$(VERSION)_$(DEB_BUILD_ARCH).deb && sudo freight cache apt/$(LSB_RELEASE_CODENAME)"
 
 man:
-	find man -name \*.ronn | xargs -n1 $(RONN) \
+	find man -name \*.ronn | xargs -n1 ronn \
 		--manual=Sandbox --organization=DevStructure --style=toc
 
 gh-pages: man
