@@ -11,7 +11,7 @@
 
 void usage(char *argv0) {
 	fprintf(stderr,
-		"Usage: %s [-n] [-q] [-h]\n",
+		"Usage: %s [-n] [-q]\n",
 		basename(argv0)
 	);
 }

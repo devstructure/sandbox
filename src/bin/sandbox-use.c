@@ -10,18 +10,17 @@
 
 void usage(char *argv0) {
 	fprintf(stderr,
-		"Usage: %s <sandbox> [-c <command>] [--callback=<callback>] [-q] [-h]\n",
+		"Usage: %s [-c <command>] [--callback=<callback>] [-q] <name>\n",
 		basename(argv0)
 	);
 }
 
 void help() {
 	fprintf(stderr,
-		"  <sandbox>                       name of a sandbox\n"
-		"-c <command>, --command=<command> command to run (defaults to your shell)\n"
-		"--callback=<callback>             command to when <command> exits\n"
-		"  -q, --quiet                     operate quietly\n"
-		"  -h, --help                      show this help message\n"
+		"  -c <command>, --command=<command> command to run (defaults to your shell)\n"
+		"  --callback=<callback>             command to when <command> exits\n"
+		"  -q, --quiet                       operate quietly\n"
+		"  -h, --help                        show this help message\n"
 	);
 }
 

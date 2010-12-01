@@ -3,18 +3,16 @@ sandbox-create(1) -- create a new sandbox
 
 ## SYNOPSIS
 
-`sandbox create` _sandbox_ [`-q`] [`-h`]  
+`sandbox create` [`-q`] _name_  
 
 ## DESCRIPTION
 
-`sandbox-create` creates a new sandbox from the base sandbox.  The new sandbox will contain a deep copy of your home directory and a shallow copy of the rest of the server's filesystem.  Devices will be remounted using `mount`(8).  The new sandbox will be stored in /var/sandboxes/_sandbox_.
+`sandbox-create` creates a new sandbox called _name_ from the base sandbox.  The new sandbox will contain a deep copy of your home directory and a shallow copy of the rest of the server's filesystem.  Devices will be remounted using `mount`(8).  The new sandbox will be stored in /var/sandboxes/_name_.
 
 After creating a sandbox, you'll probably want to run commands in it using `sandbox-use`(1).
 
 ## OPTIONS
 
-* _sandbox_:
-  Name of a sandbox.
 * `-q`, `--quiet`:
   Operate quietly.
 * `-h`, `--help`:

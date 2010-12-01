@@ -3,18 +3,16 @@ sandbox-use(1) -- run commands in a sandbox
 
 ## SYNOPSIS
 
-`sandbox use` _sandbox_ [`-c` _command_] [`--callback=`_callback_] [`-q`] [`-h`]  
+`sandbox use` [`-c` _command_] [`--callback=`_callback_] [`-q`] _name_  
 
 ## DESCRIPTION
 
-`sandbox-use` runs commands in a sandbox.  If no command is specified, your login shell is run and is given the `-i` and `-l` arguments.  The _command_ will be run as you.
+`sandbox-use` runs commands in the sandbox called _name_.  If no command is specified, your login shell is run and is given the `-i` and `-l` arguments.  The _command_ will be run as you.
 
 Regardless of what command is run, the _callback_ command, if given, will follow the termination of _command_.
 
 ## OPTIONS
 
-* _sandbox_:
-  Name of a sandbox.
 * `-c` _command_, `--command=`_command_:
   Command to run.  Defaults to your shell.
 * `--callback=`_callback_:

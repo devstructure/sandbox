@@ -3,13 +3,13 @@ sandbox-destroy(1) -- destory a sandbox
 
 ## SYNOPSIS
 
-`sandbox destroy` _sandbox_ [`-q`] [`-h`]  
+`sandbox destroy` [`-q`] _name_  
 
 ## DESCRIPTION
 
-`sandbox-destroy` unlinks all files and directories in a sandbox and unmounts devices in that sandbox.  It is NOT equivalent to
+`sandbox-destroy` unlinks all files and directories and unmounts devices in the sandbox called _name_.  It is NOT equivalent to
 
-	rm -rf /var/sandboxes/<sandbox> # Not equivalent.
+	rm -rf /var/sandboxes/<name> # Not equivalent.
 
 because that doesn't handle devices properly.
 
@@ -17,8 +17,6 @@ There is no need to aggressively destroy sandboxes as an average Linux system ca
 
 ## OPTIONS
 
-* _sandbox_:
-  Name of a sandbox.
 * `-q`, `--quiet`:
   Operate quietly.
 * `-h`, `--help`:

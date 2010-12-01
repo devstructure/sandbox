@@ -19,14 +19,12 @@ sandbox(1) -- sandbox entire UNIX servers
   Clone an existing sandbox.
 * `sandbox-use`(1):
   Run commands in a sandbox.
-* `sandbox-mark`(1):
-  Mark arbitrary files for inclusion in a blueprint.
 * `sandbox-destroy`(1):
   Destroy a sandbox.
 
 ## EXAMPLES
 
-Create a sandbox called _mq-worker_ and install the Ruby gems necessary to work from a message queue.  Then clone that sandbox to another called _mq-broker_ and install the rabbitmq-server AMQP broker and unlock its configuration file so we can modify it later.
+Create a sandbox called _mq-worker_ and install the Ruby gems necessary to work from a message queue.  Then clone that sandbox to another called _mq-broker_ and install the rabbitmq-server AMQP broker.
 
 	sandbox create mq-worker
 	sandbox use mq-worker
@@ -34,7 +32,6 @@ Create a sandbox called _mq-worker_ and install the Ruby gems necessary to work 
 	exit
 	sandbox clone mq-worker mq-broker
 	sandbox use mq-broker -c "sudo apt-get -y install rabbitmq-server"
-	sandbox unlock mq-broker /etc/rabbitmq/rabbitmq.conf
 
 ## THEME SONG
 

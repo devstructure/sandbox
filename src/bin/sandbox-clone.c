@@ -10,15 +10,13 @@
 
 void usage(char *argv0) {
 	fprintf(stderr,
-		"Usage: %s [<sandbox-src>] <sandbox-dest> [-q] [-h]\n",
+		"Usage: %s [-q] [<source>] <destination>\n",
 		basename(argv0)
 	);
 }
 
 void help() {
 	fprintf(stderr,
-		"  <sandbox-src>  name of an existing sandbox\n"
-		"  <sandbox-dest> name of a nonexistent sandbox\n"
 		"  -q, --quiet    operate quietly\n"
 		"  -h, --help     show this help message\n"
 	);

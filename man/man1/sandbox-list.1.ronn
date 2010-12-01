@@ -3,7 +3,7 @@ sandbox-list(1) -- list all sandboxes
 
 ## SYNOPSIS
 
-`sandbox list` [`-n`] [`-q`] [`-h`]  
+`sandbox list` [`-n`] [`-q`]  
 
 ## DESCRIPTION
 
