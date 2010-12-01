@@ -47,7 +47,7 @@ int sandbox_exists(const char *name, char *pathname) {
 	}
 	char *dirname = 0;
 	dirname = file_join("/var/sandboxes", name);
-	if (pathname) { strcpy(pathname, dirname); }
+	if (pathname) { strncpy(pathname, dirname, PATH_MAX); }
 	struct stat s;
 	int result = !lstat(dirname, &s) && S_ISDIR(s.st_mode);
 	free(dirname);
@@ -78,7 +78,7 @@ int sandbox_breakout(char *name) {
 	char buf[PATH_MAX];
 	WARN(!getcwd(buf, PATH_MAX), "getcwd");
 	if (name) {
-		if (strcmp("/", buf)) { strcpy(name, basename(buf)); }
+		if (strcmp("/", buf)) { strncpy(name, basename(buf), NAME_MAX); }
 		else { strcpy(name, "/"); }
 	}
 
@@ -199,20 +199,20 @@ static int _sandbox_clone(
 	{
 		const char *exclude[] = {0};
 		char fuse[PATH_MAX], shadowsrc[PATH_MAX], shadowdest[PATH_MAX];
-		strcpy(fuse, dest);
-		strcat(fuse, "/etc");
+		strncpy(fuse, dest, PATH_MAX);
+		strncat(fuse, "/etc", PATH_MAX - strlen(fuse) - 1);
 		WARN(mkdir(fuse, 0755), "mkdir");
 		if (strcmp("/", srcname)) {
-			strcpy(shadowsrc, "/var/sandboxes/.");
-			strcat(shadowsrc, srcname);
-			strcat(shadowsrc, "/etc");
+			strncpy(shadowsrc, "/var/sandboxes/.", PATH_MAX);
+			strncat(shadowsrc, srcname, PATH_MAX - strlen(shadowsrc) - 1);
+			strncat(shadowsrc, "/etc", PATH_MAX - strlen(shadowsrc) - 1);
 		}
-		else { strcpy(shadowsrc, "/etc"); }
+		else { strncpy(shadowsrc, "/etc", PATH_MAX); }
 		WARN(lstat(shadowsrc, &s), "lstat");
-		strcpy(shadowdest, "/var/sandboxes/.");
-		strcat(shadowdest, destname);
+		strncpy(shadowdest, "/var/sandboxes/.", PATH_MAX);
+		strncat(shadowdest, destname, PATH_MAX - strlen(shadowdest) - 1);
 		WARN(mkdir(shadowdest, 0755), "mkdir");
-		strcat(shadowdest, "/etc");
+		strncat(shadowdest, "/etc", PATH_MAX - strlen(shadowdest) - 1);
 		result += dir_shallowcopy(shadowsrc, shadowdest, s.st_dev, exclude);
 	}
 
@@ -264,14 +264,14 @@ int sandbox_clone(const char *srcname, const char *destname) {
 }
 
 /* Increment the named sandbox's reference count.  This must be called
- * *before* using the sandbox.  A file descriptor to the file remains
- * open and is returned for later calling `_sandbox_refcount_dec`.
+ * *before* `chroot`ing into the sandbox.  A file descriptor to the file
+ * remains open and is returned for later calling `_sandbox_refcount_dec`.
  */
 static int _sandbox_refcount_inc(const char *name) {
 	int fd = -1;
 	if (!strcmp("/", name)) { goto error; }
 	char pathname[PATH_MAX];
-	sprintf(pathname, "/var/sandboxes/.%s/refs", name);
+	snprintf(pathname, PATH_MAX, "/var/sandboxes/.%s/refs", name);
 	WARN(0 > (fd = open(pathname, O_RDWR | O_CREAT, 0644)), "open");
 	struct flock lock;
 	lock.l_type = F_RDLCK;
@@ -322,8 +322,6 @@ error:
 }
 
 /* Run the user's preferred shell or an arbitrary command in a chroot.
- *   HERE BE DRAGONS: If command == 1, return rather than executing a shell
- *   or command.
  */
 int sandbox_use(const char *name, const char *command, const char *callback) {
 	int result = -1;
@@ -404,12 +402,12 @@ int sandbox_use(const char *name, const char *command, const char *callback) {
 	if ((sockname = getenv("SSH_AUTH_SOCK"))) {
 		if (strcmp("/", buf)) {
 			char tmp[NAME_MAX];
-			strcpy(tmp, buf);
-			strcpy(buf, "/var/sandboxes/");
-			strcat(buf, tmp);
-			strcat(buf, sockname);
+			strncpy(tmp, buf, NAME_MAX);
+			strncpy(buf, "/var/sandboxes/", PATH_MAX);
+			strncat(buf, tmp, PATH_MAX - strlen(buf) - 1);
+			strncat(buf, sockname, PATH_MAX - strlen(buf) - 1);
 		}
-		else { strcpy(buf, sockname); }
+		else { strncpy(buf, sockname, PATH_MAX); }
 		if (!lstat(buf, &s1)) {
 			sockname2 = file_join(dirname1, sockname);
 			FATAL(!(sockname3 = strdup(sockname2)), "strdup");
@@ -429,16 +427,12 @@ int sandbox_use(const char *name, const char *command, const char *callback) {
 		}
 	}
 
-	/* Use the sandbox.  Return if that's all we need.
+	/* Use the sandbox.
 	 */
 	WARN(chroot(dirname1), "chroot");
 	const char *home = getenv("HOME");
 	WARN(!home, "getenv");
 	WARN(chdir(home), "chdir");
-	if ((void *)1 == command) {
-		result = 0;
-		goto error;
-	}
 
 	/* Execute the command (or the user's shell) followed by the callback
 	 * as the user.
@@ -508,15 +502,6 @@ error:
 	return result;
 }
 
-/* Shortcut.
- */
-static int _sandbox_use(const char *name) {
-	message_quiet(1);
-	int result = sandbox_use(name, (void *)1, 0);
-	message_quiet(MESSAGE_QUIET_DEFAULT);
-	return result;
-}
-
 /* Destroy a sandbox.
  */
 int sandbox_destroy(const char *name) {
@@ -543,8 +528,8 @@ int sandbox_destroy(const char *name) {
 	WARN(lstat(dirname, &s1), "lstat");
 
 	char fuse[PATH_MAX], shadow[PATH_MAX];
-	strcpy(fuse, dirname);
-	strcat(fuse, "/etc");
+	strncpy(fuse, dirname, PATH_MAX);
+	strncat(fuse, "/etc", PATH_MAX - strlen(fuse) - 1);
 	WARN(lstat(fuse, &s2), "lstat");
 	if (s1.st_dev != s2.st_dev) {
 		message("umnounting special /etc\n");
@@ -562,8 +547,8 @@ int sandbox_destroy(const char *name) {
 			message("sandboxfs misbehaving, skipping\n");
 		}
 	}
-	strcpy(shadow, "/var/sandboxes/.");
-	strcat(shadow, name);
+	strncpy(shadow, "/var/sandboxes/.", PATH_MAX);
+	strncat(shadow, name, PATH_MAX - strlen(shadow) - 1);
 	if (!lstat(shadow, &s2)) {
 		if (dir_unlink(shadow, s2.st_dev)) { goto error; }
 	}

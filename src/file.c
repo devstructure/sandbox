@@ -16,7 +16,7 @@ char *file_join(const char *dirname, const char *basename) {
 	char *result = 0;
 	size_t len = strlen(dirname) + strlen(basename) + 1;
 	const char *slash = "";
-	int offset = 0;
+	size_t offset = 0;
 	if ('/' != dirname[strlen(dirname) - 1]) {
 		++len;
 		slash = "/";

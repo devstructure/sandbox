@@ -71,7 +71,7 @@ int dir_walk(
 	 */
 	char *srcsrc = strdup(src);
 	FATAL(!srcsrc, "strdup");
-	srcsrc = (char *)realloc(srcsrc, 2 + 2 * strlen(src));
+	srcsrc = (char *)realloc(srcsrc, 1 + 2 * strlen(src));
 	FATAL(!srcsrc, "realloc");
 	strcat(srcsrc, src);
 	if (!strcmp(srcsrc, dest)) {
@@ -378,7 +378,6 @@ error:
  * See chmodsafe_unlink_statted in src/help.c in the dpkg(1) source code for
  * more detail.  We add block and character special files to the list of
  * conditions because we still want to hard link these.
- * https://github.com/devstructure/contractor/issues/#issue/2
  */
 int dir_shallowcopy_hardlink(
 	const char *src, const char *dest,

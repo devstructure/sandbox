@@ -29,8 +29,8 @@ GHashTable *services_list(
 	int i, j;
 	for (i = 0; dirnames[i]; ++i) {
 		if (0 > (jj[i] = scandir(dirnames[i], &namelists[i], 0, alphasort))) {
-			message("scandir(%s, %p, 0, alphasort): %d\n", dirnames[i],
-				&namelists[i], errno);
+			message_loud("scandir(%s, %p, 0, alphasort): %d\n",
+				dirnames[i], &namelists[i], errno);
 			util_nilist_free_partial((void **)namelists, jj, i, -1);
 			g_hash_table_destroy(result);
 			return 0;
