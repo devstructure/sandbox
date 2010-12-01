@@ -81,19 +81,17 @@
 
 <h2 id="SYNOPSIS">SYNOPSIS</h2>
 
-<p><code>sandbox clone</code> [<em>sandbox-src</em>] <em>sandbox-dest</em> [<code>-q</code>] [<code>-h</code>]</p>
+<p><code>sandbox clone</code> [<code>-q</code>] [<em>source</em>] <em>destination</em></p>
 
 <h2 id="DESCRIPTION">DESCRIPTION</h2>
 
-<p><code>sandbox-clone</code> creates a new sandbox from an existing sandbox.  The new sandbox will contain a deep copy of your home directory and a shallow copy of the rest of the server's filesystem as they exist in the source sandbox.  As with <code>sandbox-create</code>(1), devices will be remounted using <code>mount</code>(8) and the new sandbox will be stored in /var/sandboxes/<em>sandbox-dest</em>.</p>
+<p><code>sandbox-clone</code> creates a new sandbox called <em>destination</em> from an existing sandbox.  The current sandbox is used if <em>source</em> is not specified.  The new sandbox will contain a deep copy of your home directory and a shallow copy of the rest of the server's filesystem as they exist in the source sandbox.  As with <code>sandbox-create</code>(1), devices will be remounted using <code>mount</code>(8) and the new sandbox will be stored in /var/sandboxes/<em>destination</em>.</p>
 
 <p>After cloning a sandbox, you'll probably want to run commands in it using <code>sandbox-use</code>(1).</p>
 
 <h2 id="OPTIONS">OPTIONS</h2>
 
 <dl>
-<dt>[<em>sandbox-src</em>]</dt><dd>Name of an existing sandbox.  Defaults to the current sandbox.</dd>
-<dt><em>sandbox-dest</em></dt><dd>Name of a nonexistent sandbox.</dd>
 <dt><code>-q</code>, <code>--quiet</code></dt><dd>Operate quietly.</dd>
 <dt><code>-h</code>, <code>--help</code></dt><dd>Show a help message.</dd>
 </dl>
@@ -105,7 +103,7 @@
 
 <h2 id="AUTHOR">AUTHOR</h2>
 
-<p>Richard Crowley <a href="&#x6d;&#97;&#105;&#108;&#116;&#111;&#58;&#x72;&#x69;&#99;&#x68;&#x61;&#114;&#x64;&#64;&#100;&#x65;&#118;&#x73;&#116;&#114;&#x75;&#x63;&#116;&#117;&#114;&#101;&#46;&#99;&#x6f;&#109;" data-bare-link="true">&#x72;&#105;&#x63;&#x68;&#97;&#x72;&#x64;&#x40;&#100;&#101;&#118;&#x73;&#116;&#x72;&#x75;&#x63;&#x74;&#x75;&#114;&#x65;&#x2e;&#99;&#x6f;&#109;</a></p>
+<p>Richard Crowley <a href="&#109;&#x61;&#x69;&#108;&#116;&#x6f;&#58;&#114;&#105;&#x63;&#104;&#x61;&#114;&#100;&#x40;&#x64;&#101;&#118;&#x73;&#x74;&#x72;&#117;&#99;&#x74;&#117;&#x72;&#101;&#x2e;&#99;&#x6f;&#x6d;" data-bare-link="true">&#x72;&#105;&#x63;&#x68;&#97;&#114;&#x64;&#x40;&#100;&#101;&#x76;&#x73;&#x74;&#x72;&#x75;&#99;&#x74;&#x75;&#x72;&#101;&#46;&#x63;&#x6f;&#x6d;</a></p>
 
 <h2 id="SEE-ALSO">SEE ALSO</h2>
 
@@ -116,7 +114,7 @@
 
   <ol class='man-decor man-foot man foot'>
     <li class='tl'>DevStructure</li>
-    <li class='tc'>November 2010</li>
+    <li class='tc'>December 2010</li>
     <li class='tr'>sandbox-clone(1)</li>
   </ol>
 
