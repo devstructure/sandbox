@@ -1,0 +1,22 @@
+#!/bin/sh
+set -e
+case "$1" in
+	configure)
+		ldconfig
+		modprobe fuse && grep ^fuse$ /etc/modules >/dev/null || {
+			echo fuse >>/etc/modules
+		}
+		grep ^user_allow_other$ /etc/fuse.conf >/dev/null || {
+			echo user_allow_other >>/etc/fuse.conf
+		}
+		;;
+	abort-upgrade)
+		;;
+	abort-remove)
+		;;
+	abort-deconfigure)
+		;;
+	*)
+		exit 1
+		;;
+esac
