@@ -468,8 +468,8 @@ int sandbox_use(const char *name, const char *command, const char *callback) {
 			perror("execv");
 			exit(-1);
 		}
-		int status;
-		wait(&status);
+		int status2;
+		wait(&status2);
 	}
 
 	/* Offer to stop running services if this was an interactive
@@ -499,7 +499,13 @@ error:
 
 	if (services) { g_hash_table_destroy(services); }
 	util_nilist_free((void **)namelists, jj);
-	return result;
+
+	/* Unless this function itself had a problem, return the exit status
+	 * of the command that was run.
+	 */
+	if (result) { return result; }
+	else { return status; }
+
 }
 
 /* Destroy a sandbox.
