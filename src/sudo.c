@@ -11,7 +11,7 @@
 /* Execute the same program through sudo if we're not root.
  */
 int sudo(int argc, char **argv) {
-	if (!getuid()) { return 0; }
+	if (!geteuid()) { return 0; }
 	char **argv2 = (char **)malloc((argc + 2) * sizeof(char **));
 	FATAL(!argv2, "malloc");
 	argv2[0] = "sudo";
