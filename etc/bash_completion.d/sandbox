@@ -1,0 +1,63 @@
+# vim:ft=sh
+_sandbox() {
+	case "$COMP_CWORD" in
+		0) return 0;;
+		1) local command="${COMP_WORDS[0]}";;
+		*) local command="${COMP_WORDS[1]}";;
+	esac
+	local prev="${COMP_WORDS[COMP_CWORD-1]}"
+	case "$command" in
+		sandbox)
+			words="list which create clone use unlock blueprint destroy";;
+		list|sandbox-list)
+			case "$prev" in
+				-n|--names|-q|--quiet|-h|--help) return 0;;
+				*) words="--names --quiet --help";;
+			esac;;
+		which|sandbox-which)
+			case "$prev" in
+				-q|--quiet|-h|--help) return 0;;
+				*) words="--quiet --help";;
+			esac;;
+		create|sandbox-create)
+			case "$prev" in
+				-q|--quiet|-h|--help) return 0;;
+				*) words="--quiet --help";;
+			esac;;
+		clone|sandbox-clone)
+			case "$prev" in
+				-h|--help) return 0;;
+				*) words="$(sandbox-list -n) --quiet --help";;
+			esac;;
+		use|sandbox-use)
+			case "$prev" in
+				--callback|-c|--command)
+					COMPREPLY=( $(compgen -c) )
+					return 0;;
+				-h|--help) return 0;;
+				*) words="$(sandbox-list -n) --callback --command --quiet --help";;
+			esac;;
+		unlock|sandbox-unlock)
+			case "$prev" in
+				-q|--quiet|$command) words="$(sandbox-list -n) --quiet --help";;
+				-h|--help) return 0;;
+				*)
+					COMPREPLY=( $(compgen -f) )
+					return 0;;
+			esac;;
+		blueprint|sandbox-blueprint)
+			case "$prev" in
+				-h|--help) return 0;;
+				*) words="$(sandbox-list -n) --quiet --help";;
+			esac;;
+		destroy|sandbox-destroy)
+			case "$prev" in
+				-h|--help) return 0;;
+				*) words="$(sandbox-list -n) --quiet --help";;
+			esac;;
+	esac
+	COMPREPLY=( $(compgen -W "$words" -- "${COMP_WORDS[COMP_CWORD]}") )
+	return 0
+}
+complete -F _sandbox sandbox \
+	sandbox-{list,which,create,clone,use,unlock,blueprint,destroy}

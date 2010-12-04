@@ -1,10 +1,10 @@
-VERSION=2.0.0-$(LSB_RELEASE_CODENAME)1
-
 prefix=/usr/local
 bindir=${prefix}/bin
 sysconfdir=${prefix}/etc
 libdir=${prefix}/lib
 mandir=${prefix}/share/man
+
+VERSION=2.0.0-$(LSB_RELEASE_CODENAME)1
 
 DEB_BUILD_ARCH=$(shell dpkg --print-architecture)
 LSB_RELEASE_CODENAME=$(shell lsb_release -c | cut -f2)
@@ -95,9 +95,7 @@ deb:
 		control.m4 >control
 	debra create debian control
 	cp postinst debian/DEBIAN/
-	git archive --format=tar --prefix=debian/ HEAD | gzip >debian.tar.gz
-	debra sourceinstall debian debian.tar.gz -p /usr -f --sysconfdir=/etc
-	rm debian.tar.gz
+	make install prefix=/usr sysconfdir=/etc DESTDIR=debian
 	chown -R root:root debian
 	debra build debian sandbox_$(VERSION)_$(DEB_BUILD_ARCH).deb
 	debra destroy debian
