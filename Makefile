@@ -55,10 +55,27 @@ clean:
 
 install:
 	install -d $(DESTDIR)$(bindir)
-	install bin/sandbox bin/sandbox-* bin/sandboxfs $(DESTDIR)$(bindir)/
+	install \
+		bin/sandbox \
+		bin/sandbox-clone \
+		bin/sandbox-create \
+		bin/sandbox-destroy \
+		bin/sandbox-list \
+		bin/sandbox-upgrade \
+		bin/sandbox-use \
+		bin/sandbox-which \
+		bin/sandboxfs \
+		$(DESTDIR)$(bindir)/
 	install -d $(DESTDIR)$(mandir)/man1
 	install -m644 \
-		man/man1/sandbox.1 man/man1/sandbox-*.1 man/man1/sandboxfs.1 \
+		man/man1/sandbox.1 \
+		man/man1/sandbox-clone.1 \
+		man/man1/sandbox-create.1 \
+		man/man1/sandbox-destroy.1 \
+		man/man1/sandbox-list.1 \
+		man/man1/sandbox-use.1 \
+		man/man1/sandbox-which.1 \
+		man/man1/sandboxfs.1 \
 		$(DESTDIR)$(mandir)/man1/
 	install -d $(DESTDIR)$(sysconfdir)/bash_completion.d
 	install -m644 etc/bash_completion.d/sandbox \
@@ -72,10 +89,21 @@ install:
 uninstall:
 	rm -f \
 		$(DESTDIR)$(bindir)/sandbox \
-		$(DESTDIR)$(bindir)/sandbox-* \
+		$(DESTDIR)$(bindir)/sandbox-clone \
+		$(DESTDIR)$(bindir)/sandbox-create \
+		$(DESTDIR)$(bindir)/sandbox-destroy \
+		$(DESTDIR)$(bindir)/sandbox-list \
+		$(DESTDIR)$(bindir)/sandbox-upgrade \
+		$(DESTDIR)$(bindir)/sandbox-use \
+		$(DESTDIR)$(bindir)/sandbox-which \
 		$(DESTDIR)$(bindir)/sandboxfs \
 		$(DESTDIR)$(mandir)/man1/sandbox.1 \
-		$(DESTDIR)$(mandir)/man1/sandbox-*.1 \
+		$(DESTDIR)$(mandir)/man1/sandbox-clone.1 \
+		$(DESTDIR)$(mandir)/man1/sandbox-create.1 \
+		$(DESTDIR)$(mandir)/man1/sandbox-destroy.1 \
+		$(DESTDIR)$(mandir)/man1/sandbox-list.1 \
+		$(DESTDIR)$(mandir)/man1/sandbox-use.1 \
+		$(DESTDIR)$(mandir)/man1/sandbox-which.1 \
 		$(DESTDIR)$(mandir)/man1/sandboxfs.1 \
 		$(DESTDIR)$(sysconfdir)/bash_completion.d/sandbox \
 		$(DESTDIR)$(sysconfdir)/cron.d/sandbox \
