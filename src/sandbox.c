@@ -349,14 +349,15 @@ int sandbox_use(const char *name, const char *command, const char *callback) {
 	/* If the user's home directory doesn't exist in this sandbox, deep
 	 * copy if from the base sandbox.
 	 */
-	char *homesrc, *homedest;
-	WARN(!(homesrc = getenv("HOME")), "getenv");
-	homedest = file_join(dirname1, homesrc);
-	if (lstat(homedest, &s1)) {
-		const char *exclude[] = {0};
-		dir_deepcopy(homesrc, homedest, exclude);
+	char *homesrc = getenv("HOME"), *homedest;
+	if (homesrc) {
+		homedest = file_join(dirname1, homesrc);
+		if (lstat(homedest, &s1)) {
+			const char *exclude[] = {0};
+			dir_deepcopy(homesrc, homedest, exclude);
+		}
+		free(homedest);
 	}
-	free(homedest);
 
 	/* Recursively rebind mounted devices in the sandbox using mount(8).
 	 * This will only need to do actual work the first time a sandbox
@@ -431,8 +432,8 @@ int sandbox_use(const char *name, const char *command, const char *callback) {
 	 */
 	WARN(chroot(dirname1), "chroot");
 	const char *home = getenv("HOME");
-	WARN(!home, "getenv");
-	WARN(chdir(home), "chdir");
+	if (home) { WARN(chdir(home), "chdir"); }
+	else { WARN(chdir("/"), "chdir"); }
 
 	/* Execute the command (or the user's shell) followed by the callback
 	 * as the user.
