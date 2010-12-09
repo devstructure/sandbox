@@ -37,19 +37,6 @@ _sandbox() {
 				-h|--help) return 0;;
 				*) words="$(sandbox-list -n) --callback --command --quiet --help";;
 			esac;;
-		unlock|sandbox-unlock)
-			case "$prev" in
-				-q|--quiet|$command) words="$(sandbox-list -n) --quiet --help";;
-				-h|--help) return 0;;
-				*)
-					COMPREPLY=( $(compgen -f) )
-					return 0;;
-			esac;;
-		blueprint|sandbox-blueprint)
-			case "$prev" in
-				-h|--help) return 0;;
-				*) words="$(sandbox-list -n) --quiet --help";;
-			esac;;
 		destroy|sandbox-destroy)
 			case "$prev" in
 				-h|--help) return 0;;
@@ -60,4 +47,4 @@ _sandbox() {
 	return 0
 }
 complete -F _sandbox sandbox \
-	sandbox-{list,which,create,clone,use,unlock,blueprint,destroy}
+	sandbox-{list,which,create,clone,use,destroy}
