@@ -106,5 +106,5 @@ int main(int argc, char **argv) {
 	free(name);
 
 	message_free();
-	return !(name && names);
+	return 0;
 }
