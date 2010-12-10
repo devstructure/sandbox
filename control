@@ -1,0 +1,8 @@
+Package: sandbox
+Version: 2.0.0-lucid1
+Section: devel
+Priority: optional
+Architecture: i386
+Depends: bash, libfuse2, libglib2.0-0, libssl0.9.8
+Maintainer: Richard Crowley <richard@devstructure.com>
+Description: tools for sandboxing UNIX systems
