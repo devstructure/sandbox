@@ -22,6 +22,10 @@ Regardless of what command is run, the _callback_ command, if given, will follow
 * `-h`, `--help`:
   Show a help message.
 
+## ENVIRONMENT
+
+Children of `sandbox-use` (the default shell, _command_, and _callback_) have `SANDBOX` set to _name_ in their environments.
+
 ## THEME SONG
 
 The Flaming Lips - "The W.A.N.D. (The Will Always Negates Defeat)"
