@@ -435,6 +435,9 @@ int sandbox_use(const char *name, const char *command, const char *callback) {
 	if (home) { WARN(chdir(home), "chdir"); }
 	else { WARN(chdir("/"), "chdir"); }
 
+	/* Put the name of the sandbox in the environment for children. */
+	WARN(setenv("SANDBOX", name, 1), "setenv");
+
 	/* Execute the command (or the user's shell) followed by the callback
 	 * as the user.
 	 */
