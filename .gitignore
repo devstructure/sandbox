@@ -1,2 +1,5 @@
 *.[12345678]
 *.deb
+*.pyc
+*.tar
+control
