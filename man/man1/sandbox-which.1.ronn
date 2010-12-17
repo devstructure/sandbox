@@ -7,7 +7,7 @@ sandbox-which(1) -- print the name of the current sandbox
 
 ## DESCRIPTION
 
-`sandbox-which` prints the name of the current sandbox.  When you are in the base sandbox, nothing is printed.  This is in contrast to the typical representation of sandboxes which labels the base sandbox "/" but is more convenient for scripting.
+`sandbox-which` prints the name of the current sandbox.  When you are in the base sandbox, "/" is printed.
 
 ## OPTIONS
 

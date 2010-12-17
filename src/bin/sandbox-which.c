@@ -76,7 +76,7 @@ int main(int argc, char **argv) {
 
 	char *name = sandbox_which();
 	if (name) {
-		if (strcmp("/", name)) { printf("%s\n", name); }
+		printf("%s\n", name);
 		free(name);
 	}
 
