@@ -8,7 +8,7 @@ _sandbox() {
 	local prev="${COMP_WORDS[COMP_CWORD-1]}"
 	case "$command" in
 		sandbox)
-			words="list which create clone use unlock blueprint destroy";;
+			words="list which create clone use destroy";;
 		list|sandbox-list)
 			case "$prev" in
 				-n|--names|-q|--quiet|-h|--help) return 0;;
