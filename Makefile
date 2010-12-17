@@ -1,10 +1,10 @@
+VERSION=2.0.0-$(LSB_RELEASE_CODENAME)1
+
 prefix=/usr/local
 bindir=${prefix}/bin
 sysconfdir=${prefix}/etc
 libdir=${prefix}/lib
 mandir=${prefix}/share/man
-
-VERSION=2.0.0-$(LSB_RELEASE_CODENAME)1
 
 DEB_BUILD_ARCH=$(shell dpkg --print-architecture)
 LSB_RELEASE_CODENAME=$(shell lsb_release -c | cut -f2)
