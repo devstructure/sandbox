@@ -462,14 +462,11 @@ int sandbox_use(const char *name, const char *command, const char *callback) {
 	int status;
 	wait(&status);
 	if (callback) {
-		argv[0] = "/bin/sh";
-		argv[1] = "-c";
-		argv[2] = callback;
 		WARN(0 > (pid = fork()), "fork");
 		if (!pid) {
 			sudo_downgrade();
-			execv(argv[0], (char * const *)argv);
-			perror("execv");
+			execl("/bin/sh", "sh", "-c", callback, (char *)0);
+			perror("execl");
 			exit(-1);
 		}
 		int status2;
