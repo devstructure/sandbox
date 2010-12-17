@@ -441,22 +441,22 @@ int sandbox_use(const char *name, const char *command, const char *callback) {
 	/* Execute the command (or the user's shell) followed by the callback
 	 * as the user.
 	 */
-	const char *argv[] = {0, 0, 0, 0};
-	if (command) {
-		argv[0] = "/bin/sh";
-		argv[1] = "-c";
-		argv[2] = command;
-	}
-	else {
-		argv[0] = getenv("SHELL") ?: "/bin/sh";
-		argv[1] = "-i";
-		argv[2] = "-l";
-	}
 	WARN(0 > (pid = fork()), "fork");
 	if (!pid) {
 		sudo_downgrade();
-		execvp(argv[0], (char * const *)argv);
-		perror("execvp");
+		if (command) {
+			execl("/bin/sh", "sh", "-c", command, (char *)0);
+		}
+		else {
+			const char *path = getenv("SHELL") ?: "/bin/sh";
+			char *path2 = strdup(path);
+			FATAL(!path2, "strdup");
+			char argv0[NAME_MAX];
+			snprintf(argv0, NAME_MAX, "-%s [%s]", basename(path2), name);
+			free(path2);
+			execl(path, argv0, (char *)0);
+		}
+		perror("execl");
 		exit(-1);
 	}
 	int status;
