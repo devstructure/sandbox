@@ -11,5 +11,8 @@ apt-get install sandbox
 
 for S in $(ls /var/sandboxes 2>/dev/null)
 do
-	sandbox-use $S -c "sandbox-upgrade now"
+	sandbox-use $S -c "
+		apt-get update
+		apt-get install sandbox
+	"
 done
