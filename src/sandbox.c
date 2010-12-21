@@ -448,13 +448,13 @@ int sandbox_use(const char *name, const char *command, const char *callback) {
 			execl("/bin/sh", "sh", "-c", command, (char *)0);
 		}
 		else {
-			const char *path = getenv("SHELL") ?: "/bin/sh";
-			char *path2 = strdup(path);
-			FATAL(!path2, "strdup");
+			const char *shell = getenv("SHELL") ?: "/bin/sh";
+			char *shell2 = strdup(shell);
+			FATAL(!shell2, "strdup");
 			char argv0[NAME_MAX];
-			snprintf(argv0, NAME_MAX, "-%s [%s]", basename(path2), name);
-			free(path2);
-			execl(path, argv0, (char *)0);
+			snprintf(argv0, NAME_MAX, "-%s [%s]", basename(shell2), name);
+			free(shell2);
+			execlp(shell, argv0, (char *)0);
 		}
 		perror("execl");
 		exit(-1);
