@@ -33,6 +33,9 @@ int _deepcopy(const char *pathname, int fd, int flags) {
 	int shallow_fd = -1, deep_fd = -1;
 	char *template = 0;
 
+	/* There are some files that should never be deep copied. */
+	if (!strcmp("/etc/resolv.conf", pathname)) { goto reopen; }
+
 	/* Short circuit if this is already a deep copy. */
 	struct stat s;
 	if (lstat(pathname, &s)) {
