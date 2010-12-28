@@ -537,8 +537,7 @@ int sandbox_destroy(const char *name) {
 	char fuse[PATH_MAX], shadow[PATH_MAX];
 	strncpy(fuse, dirname, PATH_MAX);
 	strncat(fuse, "/etc", PATH_MAX - strlen(fuse) - 1);
-	WARN(lstat(fuse, &s2), "lstat");
-	if (s1.st_dev != s2.st_dev) {
+	if (!lstat(fuse, &s2) && s1.st_dev != s2.st_dev) {
 		message("umnounting special /etc\n");
 		pid_t pid;
 		WARN(0 > (pid = fork()), "fork");
