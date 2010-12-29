@@ -1,4 +1,4 @@
-VERSION=2.0.2-$(LSB_RELEASE_CODENAME)1
+VERSION=2.0.3-$(LSB_RELEASE_CODENAME)1
 
 prefix=/usr/local
 bindir=${prefix}/bin
